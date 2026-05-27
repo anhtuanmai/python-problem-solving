@@ -1,10 +1,13 @@
 # exercise_01/test_solution.py
 import unittest
 
-from .solution import Solution
+try:
+    from .solution import Solution
+except ImportError:
+    from solution import Solution
 
 
-class TestExercise01(unittest.TestCase):
+class TestExercise(unittest.TestCase):
     def setUp(self) -> None:
         self.solution = Solution()
 

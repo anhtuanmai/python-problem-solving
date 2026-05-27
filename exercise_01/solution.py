@@ -38,3 +38,10 @@ class Solution:
 
         print(f"count = {count:>3}")
         return results
+    
+
+if __name__ == "__main__":
+    import unittest
+    from test_solution import TestExercise
+
+    unittest.main()
