@@ -17,8 +17,8 @@ Returns:
     The total password strength as an integer.
 
 Examples:
-    "aA1!" -> 11
-    "bbB11#" -> 11
+    "aA1!" -> 25
+    "abc" -> 12
 """
 
 
