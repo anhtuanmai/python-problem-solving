@@ -10,36 +10,53 @@ class TestExercise(unittest.TestCase):
     def setUp(self) -> None:
         self.solution = Solution()
 
-    def test_example_1(self) -> None:
+    def test_1(self) -> None:
         self.assertEqual(
             self.solution.passwordStrength("aA1!"),
-            11,
+            25,
         )
-
-    def test_example_2(self) -> None:
+        
+    def test_only_lowercase(self) -> None:
         self.assertEqual(
-            self.solution.passwordStrength("bbB11#"),
-            11,
+            self.solution.passwordStrength("abc"),
+            12,
         )
 
-    def test_only_lowercase_distinct(self) -> None:
+    def test_only_uppercase(self) -> None:
         self.assertEqual(
-            self.solution.passwordStrength("abca"),
-            3,
+            self.solution.passwordStrength("ABC"),
+            15,
         )
 
-    def test_only_specials_distinct(self) -> None:
+    def test_only_digits(self) -> None:
         self.assertEqual(
-            self.solution.passwordStrength("!!@@##$$"),
-            20,
+            self.solution.passwordStrength("123"),
+            24,
         )
 
-    def test_mixed_repeated_characters(self) -> None:
+    def test_repeated_same_char(self) -> None:
         self.assertEqual(
-            self.solution.passwordStrength("aAaA111!@"),
-            16,
+            self.solution.passwordStrength("aaaa"),
+            4,
         )
 
+    def test_mixed_with_repeats(self) -> None:
+        self.assertEqual(
+            self.solution.passwordStrength("aAaA11!!"),
+            25,
+        )
+
+    def test_empty_string(self) -> None:
+        self.assertEqual(
+            self.solution.passwordStrength(""),
+            0,
+        )
+
+    def test_single_symbol(self) -> None:
+        self.assertEqual(
+            self.solution.passwordStrength("#"),
+            8,
+        )
 
 if __name__ == '__main__':
     unittest.main()

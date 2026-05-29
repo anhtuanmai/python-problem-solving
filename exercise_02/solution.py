@@ -23,10 +23,22 @@ Examples:
 
 
 class Solution:
+
     def passwordStrength(self, password: str) -> int:
-        # TODO: implement your solution
-        return 0
-    
+        unique_chars = set(password)
+        point = 0
+        for ch in unique_chars:
+                if (ch.islower()):
+                    point += 1
+                else: 
+                    if (ch.isupper()):
+                        point += 2
+                    else:
+                        point += 5
+        point += 3* len(unique_chars)
+
+        return point
+
 
 if __name__ == "__main__":
     import unittest
