@@ -45,10 +45,54 @@ queries[i] is a valid word: it does not start or end with '-', and it does not c
 
 
 class Solution:
-    def countValidWordOccurrences(self, chunks: list[str], queries: list[str]) -> int:
-        print("Please implement the solution")
-        return [2,1,0]
+
+    prevIsHyphen = False
+    words = dict()
+
+    def count(self, chunks: list[str], queries: list[str]) -> list[int]:
+        self.prevIsHyphen = False
+        self.words = dict()
+        text = "".join(chunks)
+        print(text)
+        cur = ""
+        for ch in text:
+            if (ch.islower()):
+                if (self.prevIsHyphen):
+                    self.prevIsHyphen = False
+                    cur = cur + "-" + ch
+                else:
+                    cur = cur + ch 
+            else:
+                if (ch == '-'):
+                    if len(cur)>0:#only check if we have letter beforeß
+                        if (not self.prevIsHyphen):
+                            self.prevIsHyphen = True
+                        else: #count two hyphen as separator
+                            self.addWord(cur)
+                            cur = ""
+                else: #separator case
+                    self.addWord(cur)
+                    cur = ""
+        self.addWord(cur)
+
+        print(self.words)
+
+        counts = []
+        for query in queries:
+            if query in self.words.keys():
+                counts.append(self.words[query])
+            else:
+                counts.append(0)
+        return counts
     
+    def addWord(self, newWord: str):
+        self.prevIsHyphen = False
+        if (len(newWord) > 0): #only add not-empty word
+            if (newWord in self.words.keys()):
+                self.words[newWord] += 1
+            else:
+                self.words[newWord] = 1
+        return
 
 if __name__ == "__main__":
     import unittest
