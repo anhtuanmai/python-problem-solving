@@ -4,7 +4,7 @@ Write your problem description here
 
 
 class Solution:
-    def solveProblemName(self, msg_param_01: str) -> int:
+    def solve(self, text: str) -> str:
         # TODO: implement your solution
         return "to implement"
     

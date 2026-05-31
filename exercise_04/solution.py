@@ -44,38 +44,42 @@ queries[i] is a valid word: it does not start or end with '-', and it does not c
 """
 
 
+from collections import Counter
+
+
 class Solution:
 
-    prevIsHyphen = False
+    prev_is_hyphen = False
     words = dict()
-
+    
     def count(self, chunks: list[str], queries: list[str]) -> list[int]:
-        self.prevIsHyphen = False
+        self.prev_is_hyphen = False
         self.words = dict()
         text = "".join(chunks)
-        print(text)
+
+        # print(text)
+
         cur = ""
         for ch in text:
             if (ch.islower()):
-                if (self.prevIsHyphen):
-                    self.prevIsHyphen = False
-                    cur = cur + "-" + ch
-                else:
-                    cur = cur + ch 
+                if (self.prev_is_hyphen):
+                    self.prev_is_hyphen = False
+                    cur += "-"
+                cur += ch 
             else:
                 if (ch == '-'):
                     if len(cur)>0:#only check if we have letter beforeß
-                        if (not self.prevIsHyphen):
-                            self.prevIsHyphen = True
+                        if (not self.prev_is_hyphen):
+                            self.prev_is_hyphen = True
                         else: #count two hyphen as separator
-                            self.addWord(cur)
+                            self.add_word(cur)
                             cur = ""
                 else: #separator case
-                    self.addWord(cur)
+                    self.add_word(cur)
                     cur = ""
-        self.addWord(cur)
+        self.add_word(cur)
 
-        print(self.words)
+        # print(self.words)
 
         counts = []
         for query in queries:
@@ -85,8 +89,8 @@ class Solution:
                 counts.append(0)
         return counts
     
-    def addWord(self, newWord: str):
-        self.prevIsHyphen = False
+    def add_word(self, newWord: str):
+        self.prev_is_hyphen = False
         if (len(newWord) > 0): #only add not-empty word
             if (newWord in self.words.keys()):
                 self.words[newWord] += 1

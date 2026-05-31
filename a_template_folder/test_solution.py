@@ -12,7 +12,7 @@ class TestExercise(unittest.TestCase):
 
     def test_to_write_01(self) -> None:
         self.assertEqual(
-            self.solution.solveProblemName("input here"),
+            self.solution.solve("input here"),
             "expected result",
         )
 
